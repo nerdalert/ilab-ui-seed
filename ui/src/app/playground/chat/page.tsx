@@ -21,10 +21,8 @@ import CopyToClipboardButton from '@/components/CopyToClipboardButton';
 
 const ChatPage: React.FC = () => {
   const [question, setQuestion] = useState('');
-  const [systemRole, setSystemRole] = useState(
-    'You are a cautious assistant. You carefully follow instructions.' +
-      ' You are helpful and harmless and you follow ethical guidelines and promote positive behavior.'
-  );
+  const systemRole = 'You are a cautious assistant. You carefully follow instructions.' +
+    ' You are helpful and harmless and you follow ethical guidelines and promote positive behavior.';
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSelectOpen, setIsSelectOpen] = useState(false);
@@ -87,10 +85,6 @@ const ChatPage: React.FC = () => {
 
   const handleQuestionChange = (event: React.FormEvent<HTMLInputElement>, value: string) => {
     setQuestion(value);
-  };
-
-  const handleSystemRoleChange = (value: string) => {
-    setSystemRole(value);
   };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -251,18 +245,6 @@ const ChatPage: React.FC = () => {
             <FontAwesomeIcon icon={faBroom} />
           </Button>
         </div>
-        <FormGroup fieldId="system-role-field" label={<span className={styles.boldLabel}>System Role</span>}>
-          <TextArea
-            isRequired
-            id="system-role-field"
-            name="system-role-field"
-            value={systemRole}
-            onChange={(event) => handleSystemRoleChange(event.currentTarget.value)}
-            placeholder="Enter system role..."
-            aria-label="System Role"
-            rows={2}
-          />
-        </FormGroup>
         <div ref={messagesContainerRef} className={styles.messagesContainer}>
           {messages.map((msg, index) => (
             <div key={index} className={`${styles.message} ${msg.isUser ? styles.chatQuestion : styles.chatAnswer}`}>
